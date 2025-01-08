@@ -85,3 +85,17 @@ def ECE(samples, trues, n_bims = 5):
             # calculate |acc(Bm) - conf(Bm)| * (|Bm|/n) for bin m and add to the total ECE
             ece += np.abs(avg_confidence_in_bin - accuracy_in_bin) * prob_in_bin
     return ece
+
+def majority_agree(pred, truth):
+     maj_pred_label = []
+     maj_truth_label = []
+     maj_pred_prob = []
+     maj_truth_prob = []
+     for i in range(len(pred)):
+          maj_pred_prob.append(max(pred[i]))
+          maj_truth_prob.append(max(truth[i]))
+
+          maj_pred_label.append(np.argmax(pred[i]))
+          maj_truth_label.append(np.argmax(truth[i]))
+
+     return maj_pred_prob, maj_truth_prob, maj_pred_label, maj_truth_label
